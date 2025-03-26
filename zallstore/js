@@ -11,10 +11,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showSlide() {
         slides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
+            slide.style.opacity = i === index ? "1" : "0";
         });
         index = (index + 1) % slides.length;
     }
 
     setInterval(showSlide, 3000);
+
+    // Navigasi menu
+    document.querySelectorAll(".menu a").forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelectorAll(".section").forEach(section => {
+                section.style.display = "none";
+            });
+            let target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+                target.style.display = "block";
+            }
+        });
+    });
 });
